@@ -11,10 +11,7 @@ $result = $conn->prepare($sql);
 $result->execute(array(':login' => $user_login, ':password' => $user_pass));
 $row = $result->fetch();
 if ($row){
-	$_SESSION['login'] = $row['login'];
-	$_SESSION['password'] = $row['password'];
-	$_SESSION['name'] = $row['name'];
-	$_SESSION['surname'] = $row['surname'];
+	$_SESSION['hashlogin'] = $row['hashlogin'];
 	header("Location:../");
 }
 else {

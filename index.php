@@ -1,9 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['login'] != NULL) {
-  setcookie("login", $_SESSION['login'], time() + 60);
-  setcookie("name", $_SESSION['name'], time() + 60);
-}
+setcookie("hashlogin", $_SESSION['hashlogin'], time() + 60);
 ?>
 <!DOCTYPE hmtl>
 <html lang="en">
@@ -21,8 +18,9 @@ if ($_SESSION['login'] != NULL) {
 		<a class="LinkModal" href="#">Click</a>
 		<?php include "frontend/html/login_window.html"; ?>
 		<?php include "frontend/html/newacc_window.html"; ?>
-    <?php if (isset($_COOKIE['login'])) {
-      echo("<b>Добро пожаловать, ".$_COOKIE['name']."</b");
+    <?php if (isset($_COOKIE['hashlogin'])) {
+      include "backend/hashlogin.php";
+      echo("<b>Добро пожаловать, ".$_SESSION['name']."</b");
     }
     ?>
 		<div id="overlay"></div>
