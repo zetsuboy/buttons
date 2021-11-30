@@ -6,7 +6,7 @@ include "dbconnect.php";
 $user_login = $_POST['login'];
 $user_pass = $_POST['password'];
 
-$sql = "SELECT * FROM `users` WHERE login = :login AND password = :password";
+$sql = "SELECT hashlogin FROM `users_hashlogin` WHERE user_id = (SELECT id FROM `users` WHERE login = :login AND password = :password)";
 $result = $conn->prepare($sql);
 $result->execute(array(':login' => $user_login, ':password' => $user_pass));
 $row = $result->fetch();

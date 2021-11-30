@@ -5,7 +5,7 @@ include "dbconnect.php";
 
 $user_hashlogin = $_COOKIE['hashlogin'];
 
-$sql = "SELECT * FROM `users` WHERE hashlogin = :hashlogin";
+$sql = "SELECT * FROM `users` WHERE id = (SELECT user_id FROM `users_hashlogin` WHERE hashlogin = :hashlogin)";
 $result = $conn->prepare($sql);
 $result->execute(array(':hashlogin' => $user_hashlogin));
 $row = $result->fetch();
