@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include "dbconnect.php";
 
@@ -10,7 +11,11 @@ $result = $conn->prepare($sql);
 $result->execute(array(':login' => $user_login, ':password' => $user_pass));
 $row = $result->fetch();
 if ($row){
-	echo("Добро пожаловать, ".$row['surname']." ".$row['name']);
+	$_SESSION['login'] = $row['login'];
+	$_SESSION['password'] = $row['password'];
+	$_SESSION['name'] = $row['name'];
+	$_SESSION['surname'] = $row['surname'];
+	header("Location:../");
 }
 else {
 	echo("Неверные данные!");
